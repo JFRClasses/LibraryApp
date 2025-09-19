@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,22 +30,30 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil3.compose.AsyncImage
+import coil3.compose.SubcomposeAsyncImage
 import com.pjsoft.libraryapp.components.Header
 import com.pjsoft.libraryapp.components.PopularBooks
 import com.pjsoft.libraryapp.models.books
+import com.pjsoft.libraryapp.ui.theme.BackgroundLight
+import com.pjsoft.libraryapp.ui.theme.HeaderGreenLight
 import com.pjsoft.libraryapp.ui.theme.LibraryAppTheme
 
 @Composable
 fun BooksScreen(
-    navController : NavController
+    navController : NavController,
+    innerPadding : PaddingValues
 ){
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
+            .background(BackgroundLight)
+            .padding(innerPadding)
     )
     {
         item{
@@ -58,16 +68,52 @@ fun BooksScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 10.dp)
+                    .padding(vertical = 10.dp, horizontal = 16.dp)
+                    .clip(CircleShape)
+                    .background(Color.White)
+                    .padding(12.dp)
                     .clickable{
                         navController.navigate("books/${book}")
-                    }
+                    },
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(
+                SubcomposeAsyncImage(
+                    model = book.image,
+                    contentDescription = book.title,
                     modifier = Modifier
                         .size(50.dp)
-                        .clip(CircleShape)
-                        .background(Color.Black)
+                        .clip(CircleShape),
+                    contentScale = ContentScale.Crop,
+                    loading = {
+                        Box(
+                            modifier = Modifier
+                                .size(50.dp)
+                                .clip(CircleShape)
+                                .background(HeaderGreenLight),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator(
+                                strokeWidth = 2.dp,
+                                color = Color.White,
+                                modifier = Modifier.size(18.dp)
+                            )
+                        }
+                    },
+                    error = {
+                        Box(
+                            modifier = Modifier
+                                .size(50.dp)
+                                .clip(CircleShape)
+                                .background(HeaderGreenLight),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = book.title.take(2).uppercase(),
+                                style = MaterialTheme.typography.titleMedium,
+                                color = Color.White
+                            )
+                        }
+                    }
                 )
                 ////////////////////
                 Column(
@@ -99,7 +145,8 @@ fun BooksScreen(
 fun BooksScreenPreview(){
     LibraryAppTheme {
         BooksScreen(
-            navController = rememberNavController()
+            navController = rememberNavController(),
+            innerPadding = PaddingValues(0.dp)
         )
     }
 }

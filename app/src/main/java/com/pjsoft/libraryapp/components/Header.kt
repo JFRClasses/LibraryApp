@@ -21,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.pjsoft.libraryapp.models.books
+import com.pjsoft.libraryapp.ui.theme.HeaderGreen
 
 @Composable
 fun Header(){
@@ -29,7 +31,7 @@ fun Header(){
             .fillMaxWidth()
             .height(300.dp)
             .clip(RoundedCornerShape(bottomStart = 70.dp))
-            .background(Color.DarkGray)
+            .background(HeaderGreen)
             .padding(20.dp)
             .padding(top = 20.dp)
     )
@@ -43,6 +45,6 @@ fun Header(){
             color = Color.White
         )
         // Tarjeta de lectura de libro
-        BookCard()
+        BookCard(book = books[2])
     }
 }

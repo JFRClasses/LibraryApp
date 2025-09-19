@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.pjsoft.libraryapp.ui.theme.HeaderGreenLight
 
 @Composable
 fun HeaderInfo(){
@@ -42,7 +43,7 @@ fun HeaderInfo(){
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape)
-                .background(Color.LightGray)
+                .background(HeaderGreenLight)
                 .padding(5.dp)
         )
         Box(
@@ -50,7 +51,7 @@ fun HeaderInfo(){
                 .padding(start = 20.dp)
                 .size(40.dp)
                 .clip(CircleShape)
-                .background(Color.LightGray)
+                .background(HeaderGreenLight)
                 .padding(5.dp)
         ) {  }
     }

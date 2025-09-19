@@ -4,8 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
@@ -16,7 +19,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,6 +31,9 @@ import androidx.navigation.navArgument
 import com.pjsoft.libraryapp.screens.BookDetailScreen
 import com.pjsoft.libraryapp.screens.BooksScreen
 import com.pjsoft.libraryapp.screens.FavoritesScreen
+import com.pjsoft.libraryapp.ui.theme.AccentYellow
+import com.pjsoft.libraryapp.ui.theme.BackgroundLight
+import com.pjsoft.libraryapp.ui.theme.BottomBarBackground
 import com.pjsoft.libraryapp.ui.theme.LibraryAppTheme
 // Intent
 class MainActivity : ComponentActivity() {
@@ -38,7 +46,12 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
                     bottomBar = {
-                        NavigationBar {
+                        NavigationBar(
+                            modifier = Modifier
+                                .background(BackgroundLight)
+                                .clip(RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp)),
+                            containerColor = BottomBarBackground
+                        ) {
                             NavigationBarItem(
                                 selected = false,
                                 onClick = {
@@ -47,14 +60,11 @@ class MainActivity : ComponentActivity() {
                                 icon = {
                                     Icon(
                                         imageVector = Icons.Default.Menu,
-                                        contentDescription = "home"
+                                        contentDescription = "home",
+                                        modifier = Modifier.size(35.dp),
+                                        tint = AccentYellow
                                     )
                                 },
-                                label = {
-                                    Text(
-                                        text = "Mis libros"
-                                    )
-                                }
                             )
                             NavigationBarItem(
                                 selected = false,
@@ -64,12 +74,9 @@ class MainActivity : ComponentActivity() {
                                 icon = {
                                     Icon(
                                         imageVector = Icons.Default.Favorite,
-                                        contentDescription = "favorites"
-                                    )
-                                },
-                                label = {
-                                    Text(
-                                        text = "Favoritos"
+                                        contentDescription = "favorites",
+                                        modifier = Modifier.size(35.dp),
+                                        tint = AccentYellow
                                     )
                                 }
                             )
@@ -82,7 +89,8 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(route = "books") {
                             BooksScreen(
-                                navController = navController
+                                navController = navController,
+                                innerPadding = innerPadding
                             )
                         }
                         composable(route = "favorites") {

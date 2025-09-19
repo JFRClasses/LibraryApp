@@ -9,19 +9,15 @@ data class Book(
     val image : String
 )
 val books = listOf(
-    Book(1, "Cien años de soledad", "Gabriel García Márquez", 1967, "Una saga familiar en el pueblo ficticio de Macondo.", "https://ejemplo.com/imagenes/cien_anos.jpg"),
-    Book(2, "Don Quijote de la Mancha", "Miguel de Cervantes", 1605, "Las aventuras de un caballero idealista y su escudero.", "https://ejemplo.com/imagenes/don_quijote.jpg"),
-    Book(3, "1984", "George Orwell", 1949, "Una distopía sobre un régimen totalitario y la vigilancia.", "https://ejemplo.com/imagenes/1984.jpg"),
-    Book(4, "Orgullo y prejuicio", "Jane Austen", 1813, "Una historia de amor y clases sociales en la Inglaterra del siglo XIX.", "https://ejemplo.com/imagenes/orgullo_prejuicio.jpg"),
-    Book(5, "El principito", "Antoine de Saint-Exupéry", 1943, "Un cuento filosófico sobre la vida y la amistad.", "https://ejemplo.com/imagenes/el_principito.jpg"),
-    Book(6, "Fahrenheit 451", "Ray Bradbury", 1953, "Una sociedad donde los libros están prohibidos y se queman.", "https://ejemplo.com/imagenes/fahrenheit_451.jpg"),
-    Book(7, "Crimen y castigo", "Fiódor Dostoyevski", 1866, "Un joven comete un asesinato y enfrenta las consecuencias morales.", "https://ejemplo.com/imagenes/crimen_castigo.jpg"),
-    Book(8, "Matar a un ruiseñor", "Harper Lee", 1960, "Una niña presencia la injusticia racial en el sur de EE.UU.", "https://ejemplo.com/imagenes/matar_ruisenor.jpg"),
-    Book(9, "La sombra del viento", "Carlos Ruiz Zafón", 2001, "Un joven descubre un libro maldito en la Barcelona de posguerra.", "https://ejemplo.com/imagenes/sombra_viento.jpg"),
-    Book(10, "El nombre de la rosa", "Umberto Eco", 1980, "Un misterio medieval en una abadía benedictina.", "https://ejemplo.com/imagenes/nombre_rosa.jpg"),
-    Book(11, "Rayuela", "Julio Cortázar", 1963, "Una novela experimental sobre la vida y el amor en París.", "https://ejemplo.com/imagenes/rayuela.jpg"),
-    Book(12, "El señor de los anillos", "J.R.R. Tolkien", 1954, "Una épica aventura de fantasía en la Tierra Media.", "https://ejemplo.com/imagenes/senor_anillos.jpg"),
-    Book(13, "La metamorfosis", "Franz Kafka", 1915, "Un hombre despierta transformado en un insecto gigante.", "https://ejemplo.com/imagenes/metamorfosis.jpg"),
-    Book(14, "Pedro Páramo", "Juan Rulfo", 1955, "Un hombre busca a su padre en un pueblo fantasma.", "https://ejemplo.com/imagenes/pedro_paramo.jpg"),
-    Book(15, "Los juegos del hambre", "Suzanne Collins", 2008, "Una joven lucha por sobrevivir en un reality show mortal.", "https://ejemplo.com/imagenes/juegos_hambre.jpg")
+    Book(1, "1984", "George Orwell", 1949, "Distopía sobre vigilancia y control totalitario.", "https://m.media-amazon.com/images/I/618QN9w1zmL._AC_UF1000,1000_QL80_.jpg"),
+    Book(2, "Cien años de soledad", "Gabriel García Márquez", 1967, "Saga familiar en Macondo, realismo mágico puro.", "https://m.media-amazon.com/images/I/81AFocW+J-L._AC_UF1000,1000_QL80_.jpg"),
+    Book(3, "El nombre del viento", "Patrick Rothfuss", 2007, "Crónica épica de Kvothe, músico y mago legendario.", "https://m.media-amazon.com/images/I/81vpsIs58WL._AC_UF1000,1000_QL80_.jpg"),
+    Book(4, "Sapiens", "Yuval Noah Harari", 2011, "Historia de la humanidad desde la evolución hasta hoy.", "https://m.media-amazon.com/images/I/71XwV0YpTIL._AC_UF1000,1000_QL80_.jpg"),
+    Book(5, "La sombra del viento", "Carlos Ruiz Zafón", 2001, "Misterio literario en la Barcelona de posguerra.", "https://m.media-amazon.com/images/I/913DdP7RflL._AC_UF1000,1000_QL80_.jpg"),
+    Book(6, "Fahrenheit 451", "Ray Bradbury", 1953, "Sociedad donde los libros están prohibidos y quemados.", "https://m.media-amazon.com/images/I/71OFqSRFDgL._AC_UF1000,1000_QL80_.jpg"),
+    Book(7, "Los pilares de la Tierra", "Ken Follett", 1989, "Construcción de una catedral en la Edad Media.", "https://m.media-amazon.com/images/I/91zbi9M+mKL._AC_UF1000,1000_QL80_.jpg"),
+    Book(8, "El psicoanalista", "John Katzenbach", 2002, "Thriller psicológico sobre un doctor perseguido.", "https://m.media-amazon.com/images/I/81ZLwAwVwBL._AC_UF1000,1000_QL80_.jpg"),
+    Book(9, "La carretera", "Cormac McCarthy", 2006, "Viaje postapocalíptico de un padre y su hijo.", "https://m.media-amazon.com/images/I/71g2ednj0JL._AC_UF1000,1000_QL80_.jpg"),
+    Book(10, "Don Quijote de la Mancha", "Miguel de Cervantes", 1605, "Aventuras de un hidalgo que cree ser caballero.", "https://m.media-amazon.com/images/I/6173YSqHPtL._AC_UF1000,1000_QL80_.jpg")
 )
+

@@ -19,9 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import coil3.compose.SubcomposeAsyncImage
 import com.pjsoft.libraryapp.models.books
+import com.pjsoft.libraryapp.ui.theme.HeaderGreenLight
 
 @Composable
 fun PopularBooks(){
@@ -48,12 +52,29 @@ fun PopularBooks(){
                         .background(Color.White),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Box(
+                    SubcomposeAsyncImage(
+                        model = book.image,
+                        contentDescription = book.title,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .weight(1f)
-                            .background(Color.DarkGray)
-                    ) {  }
+                            .weight(1f),
+                        contentScale = ContentScale.Crop,
+                        error = {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(HeaderGreenLight),
+                                contentAlignment = Alignment.Center
+                            ){
+                                Text(
+                                    text = book.title.take(2).uppercase(),
+                                    style = MaterialTheme.typography.headlineLarge,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.White
+                                )
+                            }
+                        }
+                    )
                     Text(
                         text = book.title,
                         style = MaterialTheme.typography.bodySmall,
