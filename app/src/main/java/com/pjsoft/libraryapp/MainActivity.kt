@@ -1,0 +1,125 @@
+package com.pjsoft.libraryapp
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgs
+import androidx.navigation.navArgument
+import com.pjsoft.libraryapp.screens.BookDetailScreen
+import com.pjsoft.libraryapp.screens.BooksScreen
+import com.pjsoft.libraryapp.screens.FavoritesScreen
+import com.pjsoft.libraryapp.ui.theme.LibraryAppTheme
+// Intent
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            LibraryAppTheme {
+                val navController = rememberNavController()
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = {
+                        NavigationBar {
+                            NavigationBarItem(
+                                selected = false,
+                                onClick = {
+                                    navController.navigate("books")
+                                },
+                                icon = {
+                                    Icon(
+                                        imageVector = Icons.Default.Menu,
+                                        contentDescription = "home"
+                                    )
+                                },
+                                label = {
+                                    Text(
+                                        text = "Mis libros"
+                                    )
+                                }
+                            )
+                            NavigationBarItem(
+                                selected = false,
+                                onClick = {
+                                    navController.navigate("favorites")
+                                },
+                                icon = {
+                                    Icon(
+                                        imageVector = Icons.Default.Favorite,
+                                        contentDescription = "favorites"
+                                    )
+                                },
+                                label = {
+                                    Text(
+                                        text = "Favoritos"
+                                    )
+                                }
+                            )
+                        }
+                    }
+                ) { innerPadding ->
+                    NavHost(
+                        navController = navController,
+                        startDestination = "books"
+                    ) {
+                        composable(route = "books") {
+                            BooksScreen(
+                                navController = navController
+                            )
+                        }
+                        composable(route = "favorites") {
+                            FavoritesScreen()
+                        }
+                        composable(
+                            route = "books/{id}",
+                            arguments = listOf(
+                                navArgument("id"){
+                                    type = NavType.IntType
+                                }
+                            )
+                        ) { backStackEntry ->
+                            val id = backStackEntry.arguments?.getInt("id") ?: 0
+                            BookDetailScreen(
+                                bookId = id
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    LibraryAppTheme {
+        Greeting("Android")
+    }
+}
