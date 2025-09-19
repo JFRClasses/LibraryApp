@@ -17,3 +17,4 @@ val AccentYellow = Color(0xFFF6C34A)
 val AccentYellowDark = Color(0xFFD29B2F)
 val BottomBarBackground = Color.White
 val TextSecondary = Color(0xFF5F6368)
+val ChipBg = Color(0xFFECEBE7)
