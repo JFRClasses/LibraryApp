@@ -28,9 +28,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgs
 import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import com.pjsoft.libraryapp.screens.BookDetailScreen
+import com.pjsoft.libraryapp.screens.BookDetailScreenRoute
+import com.pjsoft.libraryapp.screens.BookScreenRoute
 import com.pjsoft.libraryapp.screens.BooksScreen
 import com.pjsoft.libraryapp.screens.FavoritesScreen
+import com.pjsoft.libraryapp.screens.FavoritesScreenRoute
 import com.pjsoft.libraryapp.ui.theme.AccentYellow
 import com.pjsoft.libraryapp.ui.theme.BackgroundLight
 import com.pjsoft.libraryapp.ui.theme.BottomBarBackground
@@ -55,7 +59,14 @@ class MainActivity : ComponentActivity() {
                             NavigationBarItem(
                                 selected = false,
                                 onClick = {
-                                    navController.navigate("books")
+                                    navController.navigate(BookScreenRoute){
+                                        launchSingleTop = true
+                                        // Grafo Splash Screen
+                                        popUpTo(navController.graph.startDestinationId){
+                                            saveState = true
+                                        }
+                                        restoreState = true
+                                    }
                                 },
                                 icon = {
                                     Icon(
@@ -68,8 +79,15 @@ class MainActivity : ComponentActivity() {
                             )
                             NavigationBarItem(
                                 selected = false,
-                                onClick = {
-                                    navController.navigate("favorites")
+                                onClick = { //CLASES
+                                    navController.navigate(FavoritesScreenRoute){
+                                        launchSingleTop = true
+                                        // Grafo Splash Screen
+                                        popUpTo(navController.graph.startDestinationId){
+                                            saveState = true
+                                        }
+                                        restoreState = true
+                                    }
                                 },
                                 icon = {
                                     Icon(
@@ -85,30 +103,41 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = "books"
+                        startDestination = BookScreenRoute
                     ) {
-                        composable(route = "books") {
+                        composable<BookScreenRoute> {
                             BooksScreen(
                                 navController = navController,
                                 innerPadding = innerPadding
                             )
                         }
-                        composable(route = "favorites") {
+                        composable<FavoritesScreenRoute> {
                             FavoritesScreen()
                         }
-                        composable(
-                            route = "books/{id}",
-                            arguments = listOf(
-                                navArgument("id"){
-                                    type = NavType.IntType
-                                }
-                            )
-                        ) { backStackEntry ->
-                            val id = backStackEntry.arguments?.getInt("id") ?: 0
+
+                        composable<BookDetailScreenRoute> { backStackEntry ->
+                            val arguments = backStackEntry.toRoute<BookDetailScreenRoute>()
                             BookDetailScreen(
-                                bookId = id
+                                bookId = arguments.id
                             )
                         }
+
+//                        composable(
+//                            route = "books/{id}",
+//                            arguments = listOf(
+//                                navArgument("id"){
+//                                    type = NavType.IntType
+//                                }
+//                            )
+//                        ) { backStackEntry ->
+//                            val id = backStackEntry.arguments?.getInt("id") ?: 0
+//                            BookDetailScreen(
+//                                bookId = id,
+//
+//                            )
+//                        }
+
+
                     }
                 }
             }

@@ -73,7 +73,7 @@ fun BooksScreen(
                     .background(Color.White)
                     .padding(12.dp)
                     .clickable{
-                        navController.navigate("books/${book.id}")
+                        navController.navigate(BookDetailScreenRoute(book.id))
                     },
                 verticalAlignment = Alignment.CenterVertically
             ) {
